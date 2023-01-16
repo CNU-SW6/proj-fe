@@ -36,4 +36,5 @@ airbnb style 적용
 [storybook](https://storybook.js.org/)
 
 #### 실행
-`npm run storybook`
+`npm run storybook`  
+`localhost:6006` 접속
