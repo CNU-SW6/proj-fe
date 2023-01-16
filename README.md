@@ -34,3 +34,6 @@ airbnb style 적용
 
 ### storybook
 [storybook](https://storybook.js.org/)
+
+#### 실행
+`npm run storybook`
