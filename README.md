@@ -29,3 +29,8 @@ ex) `git checkout -b 이름`
 >> **styles** (css 파일)  
 >> **utils** (상수나 공통 함수, 유틸리티를 담는 폴더)  
 
+### eslint
+airbnb style 적용
+
+### storybook
+[storybook](https://storybook.js.org/)
