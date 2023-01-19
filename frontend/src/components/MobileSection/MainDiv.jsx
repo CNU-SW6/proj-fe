@@ -5,7 +5,6 @@ const MobileDiv = styled.div`
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  background-color: aliceblue;
 `;
 
 function MainDiv({ children }) {
@@ -13,6 +12,6 @@ function MainDiv({ children }) {
 }
 
 MainDiv.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.arrayOf(PropTypes.element).isRequired,
 };
 export default MainDiv;
