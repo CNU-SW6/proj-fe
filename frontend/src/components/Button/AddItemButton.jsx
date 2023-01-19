@@ -2,8 +2,8 @@ import React from 'react';
 import styled from '@emotion/styled';
 import plus from '../../assets/plusIcon.png';
 const AddItemButtonDiv = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   background-color: gray;
   text-align: center;
