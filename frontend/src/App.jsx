@@ -6,6 +6,7 @@ import SignupPage from './pages/SignupPage';
 import MainPage from './pages/MainPage';
 import SearchPage from './pages/SearchPage';
 import SharePage from './pages/SharePage';
+import ColorSelectPage from './pages/ColorSelectPage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/lookgood" element={<MainPage />} />
+        <Route path="/lookgood/color" element={<ColorSelectPage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/share" element={<SharePage />} />
       </Routes>

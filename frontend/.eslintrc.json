@@ -12,12 +12,6 @@
   },
   "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": ["error",
-    {
-      "singleQuote": true,
-      "parser": "flow",
-      "endOfLine": "auto"
-    }],
     "import/newline-after-import": "off",
     "import/no-extraneous-dependencies": "off",
     "import/prefer-default-export": "off",
@@ -28,6 +22,7 @@
     "no-unused-vars": "warn",
     "react/jsx-one-expression-per-line": "off",
     "react/prop-types": "warn",
-    "arrow-parens": "warn"
+    "arrow-parens": "warn",
+    "arrow-body-style": "off"
   }
 }
