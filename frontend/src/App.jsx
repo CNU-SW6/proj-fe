@@ -7,6 +7,7 @@ import MainPage from './pages/MainPage';
 import SearchPage from './pages/SearchPage';
 import SharePage from './pages/SharePage';
 import ColorSelectPage from './pages/ColorSelectPage';
+import ItemModal from './components/Modal/ItemModal';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/lookgood/color" element={<ColorSelectPage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/share" element={<SharePage />} />
+        <Route path="/test" element={<ItemModal />} />
       </Routes>
     </BrowserRouter>
   );

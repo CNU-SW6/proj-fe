@@ -5,14 +5,10 @@ import PropTypes from 'prop-types';
 import ColorArea from './ColorArea';
 
 const Modal = styled.div`
-  width: 15%;
-  height: 50%;
+  width: 100%;
   background-color: white;
   border: none;
   border-radius: 10px;
-  position: fixed;
-  right: 5%;
-  top: 25%;
   box-shadow: 1px 1px 3px 1px #bbb;
   display: grid;
   grid-template-rows: 0.5fr 2fr 2fr 2fr 2fr;

@@ -8,6 +8,7 @@ import top from '../assets/long_sleeve_t_shirt.png';
 import bottom from '../assets/slacks.png';
 import shoes from '../assets/shoes.png';
 import ColorModal from '../components/Modal/ColorModal';
+import ItemModal from '../components/Modal/ItemModal';
 
 const DUMMY_DATA = [
   {
@@ -36,31 +37,12 @@ const DUMMY_DATA = [
   },
 ];
 
-const DUMMY_DATA_2 = [
-  {
-    item: '모자',
-    color: 'wheat',
-  },
-  {
-    item: '상의',
-    color: 'ivory',
-  },
-  {
-    item: '하의',
-    color: 'lightblue',
-  },
-  {
-    item: '신발',
-    color: 'lightgray',
-  },
-];
-
 function MainPage() {
   return (
     <MainDiv>
       <Header />
       <Sections items={DUMMY_DATA} />
-      <ColorModal items={DUMMY_DATA_2} />
+      <ItemModal />
     </MainDiv>
   );
 }
