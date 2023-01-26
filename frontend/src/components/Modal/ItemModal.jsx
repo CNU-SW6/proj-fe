@@ -6,18 +6,22 @@ import MainDiv from '../MobileSection/MainDiv';
 
 const DUMMY_DATA_2 = [
   {
+    id: 'cap',
     item: '모자',
     color: 'wheat',
   },
   {
+    id: 'top',
     item: '상의',
     color: 'ivory',
   },
   {
+    id: 'bottom',
     item: '하의',
     color: 'lightblue',
   },
   {
+    id: 'shoes',
     item: '신발',
     color: 'lightgray',
   },

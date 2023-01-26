@@ -1,23 +1,23 @@
 .LoadingPage {
-    height: 100vh;
-    width: 100vw;
-    background: linear-gradient( #FFD2FC, #FBCFC7);
-    background-repeat:no-repeat;
-    display: inline-grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    text-align: center;
-    align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(#ffd2fc, #fbcfc7);
+  background-repeat: no-repeat;
+  display: inline-grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  text-align: center;
+  align-items: center;
 }
 
 .LoadingPageLogo {
-    padding: 0;
-    margin: 0;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 48px;
-    color: #FFFFFF;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 0;
+  margin: 0;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 48px;
+  color: #ffffff;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }

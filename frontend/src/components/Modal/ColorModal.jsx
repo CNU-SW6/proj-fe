@@ -26,7 +26,7 @@ function ColorModal({ items }) {
     <Modal>
       <ModalTitle>색상표</ModalTitle>
       {items.map((item) => {
-        return <ColorArea key={v4()} item={item.item} color={item.color} />;
+        return <ColorArea key={v4()} id={item.id} item={item.item} color={item.color} />;
       })}
     </Modal>
   );
