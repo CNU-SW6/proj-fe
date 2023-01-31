@@ -49,8 +49,7 @@ const ShowColorList = () => {
     <ColorListDiv>
       <ColorParagraph>색상선택</ColorParagraph>
       <ColorListUl>
-        {ColorList.map((item) => {
-          const { color } = item;
+        {ColorList.map((color) => {
           return (
             <ColorListLi key={v4()}>
               <ColorSpan color={color} size={30} />

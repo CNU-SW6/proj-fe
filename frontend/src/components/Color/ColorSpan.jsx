@@ -2,6 +2,11 @@ import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 
+const Container = styled.div`
+  position: relative;
+  display: inline-block;
+`;
+
 const ColorDiv = styled.div`
   width: ${({ size }) => size && `${size}px`};
   height: ${({ size }) => size && `${size}px`};
@@ -12,9 +17,19 @@ const ColorDiv = styled.div`
 
 const ColorSpan = ({ color, size, ...props }) => {
   const handleColorSelect = (e) => {
-    console.log(e.target);
+    const TargetColor = e.target.className;
   };
-  return <ColorDiv color={color} size={size} {...props} onClick={handleColorSelect} />;
+  return (
+    <Container>
+      <ColorDiv
+        color={color.color}
+        className={`color_${color.color}`}
+        size={size}
+        {...props}
+        onClick={handleColorSelect}
+      />
+    </Container>
+  );
 };
 
 ColorSpan.propTypes = {

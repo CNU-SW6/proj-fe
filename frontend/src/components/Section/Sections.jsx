@@ -12,8 +12,8 @@ function Sections({ items }) {
     <SectionDiv>
       {items.map((item) => {
         return (
-          <MainSection key={v4()} id={item.id} backgroundColor={item.color} height={item.height} style={{ textAlign: 'center' }}>
-            <img src={item.img} height="100%" alt={item.id} />
+          <MainSection key={v4()} id={item.id} backgroundColor={item.color} height={item.height} style={{ textAlign: 'center', overflow: 'hidden' }}>
+            <img src={item.img} height="100%" alt={item.id} style={{ position: 'relative', left: '100%', marginLeft: '-200%' }} />
           </MainSection>
         );
       })}

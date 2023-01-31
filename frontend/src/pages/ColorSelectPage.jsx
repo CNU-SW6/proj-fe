@@ -5,12 +5,11 @@ import qs from 'query-string';
 import Header from '../components/Header';
 import MainDiv from '../components/MobileSection/MainDiv';
 import ShowColorList from '../components/Color/ShowColorList';
-import { getRandomItem } from '../assets/ImageList';
-
+import { Clothes } from '../assets/ImageList';
 const ItemDiv = styled.div`
   width: 100%;
   background-color: ${({ color }) => color};
-  height: 40%;
+  height: 30%;
   border-bottom: 1px solid lightgray;
   display: flex;
   justify-content: center;
@@ -24,7 +23,7 @@ function ColorSelectPage() {
     <MainDiv>
       <Header />
       <ItemDiv color={color} item={item}>
-        <img src={`${getRandomItem(item)}`} alt="cap" height="90%" />
+        <img src={`${Clothes(item)}`} alt="cap" height="100%" />
       </ItemDiv>
       <ShowColorList />
     </MainDiv>

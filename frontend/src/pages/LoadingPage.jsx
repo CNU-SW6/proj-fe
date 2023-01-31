@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/main.css';
 
-function LodingPage() {
+function LoadingPage() {
   const navigate = useNavigate();
   const timeout = () => {
     setTimeout(() => {
@@ -23,4 +23,4 @@ function LodingPage() {
   );
 }
 
-export default LodingPage;
+export default LoadingPage;
