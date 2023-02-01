@@ -1,7 +1,11 @@
-export const selectColor = ({ index, color }) => {
+import { SELECT_COLOR } from './types';
+
+export const selectColor = (id, color) => {
   return {
-    type: 'SELECT_COLOR',
-    index,
-    color,
+    type: SELECT_COLOR,
+    payload: {
+      id,
+      color,
+    },
   };
 };

@@ -11,7 +11,7 @@ const ShowDiv = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
 `;
-function MyPage() {
+const MyPage = () => {
   return (
     <MainDiv>
       <Header />
@@ -32,6 +32,6 @@ function MyPage() {
       </ShowDiv>
     </MainDiv>
   );
-}
+};
 
 export default MyPage;

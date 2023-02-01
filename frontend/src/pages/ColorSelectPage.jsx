@@ -1,11 +1,11 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import qs from 'query-string';
+import { useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import MainDiv from '../components/MobileSection/MainDiv';
 import ShowColorList from '../components/Color/ShowColorList';
-import { Clothes } from '../assets/ImageList';
+
 const ItemDiv = styled.div`
   width: 100%;
   background-color: ${({ color }) => color};
@@ -15,19 +15,30 @@ const ItemDiv = styled.div`
   justify-content: center;
   align-items: center;
 `;
-function ColorSelectPage() {
-  const query = qs.parse(useLocation().search);
-  const { color, item } = query;
+const ColorSelectPage = ({ items }) => {
+  const location = useLocation();
+  const ID = location.state.id;
+  const getItem = items.filter((item) => item.id === ID)[0];
+
+  const [color, setColor] = useState(getItem.color);
+
+  const getColor = (value) => {
+    setColor(value);
+  };
 
   return (
     <MainDiv>
       <Header />
-      <ItemDiv color={color} item={item}>
-        <img src={`${Clothes(item)}`} alt="cap" height="100%" />
+      <ItemDiv color={color} item={getItem.id}>
+        <img src={getItem.img} alt={getItem.id} height="100%" />
       </ItemDiv>
-      <ShowColorList />
+      <ShowColorList id={ID} color={color} getColor={getColor} />
     </MainDiv>
   );
-}
+};
+
+ColorSelectPage.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+};
 
 export default ColorSelectPage;

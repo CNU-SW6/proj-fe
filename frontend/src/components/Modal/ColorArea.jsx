@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import { createSearchParams, useNavigate } from 'react-router-dom';
 
 const ColorAreaDiv = styled.div`
   text-align: center;
@@ -22,34 +21,17 @@ const ColorAreaValue = styled.div`
   margin: auto;
 `;
 
-function ColorArea({ id, item, color }) {
-  const navigate = useNavigate();
-
-  const handleColorSelect = () => {
-    navigate({
-      pathname: './color',
-      search: createSearchParams({
-        item: `${id}`,
-        color: `${color}`,
-      }).toString(),
-    });
-  };
-
+const ColorArea = ({ item }) => {
   return (
     <ColorAreaDiv>
-      <ColorAreaTitle>{item}</ColorAreaTitle>
-      <ColorAreaValue color={color} onClick={handleColorSelect} />
+      <ColorAreaTitle>{item.item}</ColorAreaTitle>
+      <ColorAreaValue className={`${item.id}_Section`} color={item.color} />
     </ColorAreaDiv>
   );
-}
+};
 
 ColorArea.propTypes = {
-  id: PropTypes.string.isRequired,
-  item: PropTypes.string.isRequired,
-  color: PropTypes.string,
+  item: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
-ColorArea.defaultProps = {
-  color: 'black',
-};
 export default ColorArea;

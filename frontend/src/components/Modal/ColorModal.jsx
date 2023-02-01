@@ -21,16 +21,16 @@ const ModalTitle = styled.p`
   font-weight: bold;
 `;
 
-function ColorModal({ items }) {
+const ColorModal = ({ items }) => {
   return (
     <Modal>
       <ModalTitle>색상표</ModalTitle>
       {items.map((item) => {
-        return <ColorArea key={v4()} id={item.id} item={item.item} color={item.color} />;
+        return <ColorArea key={v4()} item={item} />;
       })}
     </Modal>
   );
-}
+};
 
 ColorModal.propTypes = {
   items: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,

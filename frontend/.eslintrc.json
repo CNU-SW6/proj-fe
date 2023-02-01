@@ -23,6 +23,10 @@
     "react/jsx-one-expression-per-line": "off",
     "react/prop-types": "warn",
     "arrow-parens": "warn",
-    "arrow-body-style": "off"
+    "arrow-body-style": "off",
+    "default-param-last": "off",
+    "no-confusing-arrow" : "off",
+    "implicit-arrow-linebreak": "off",
+    "function-paren-newline": "off"
   }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import menuIcon from '../../assets/menuIcon.png';
 import '../../styles/header.css';
-function Header({ color, ...props }) {
+const Header = ({ color, ...props }) => {
   return (
     <div className="Header">
       <img className="Header_menuIcon" alt="menu" src={menuIcon} />
@@ -11,7 +11,7 @@ function Header({ color, ...props }) {
       </p>
     </div>
   );
-}
+};
 
 Header.propTypes = {
   color: PropTypes.string,

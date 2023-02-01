@@ -16,18 +16,9 @@ const ColorDiv = styled.div`
 `;
 
 const ColorSpan = ({ color, size, ...props }) => {
-  const handleColorSelect = (e) => {
-    const TargetColor = e.target.className;
-  };
   return (
     <Container>
-      <ColorDiv
-        color={color.color}
-        className={`color_${color.color}`}
-        size={size}
-        {...props}
-        onClick={handleColorSelect}
-      />
+      <ColorDiv color={color.color} className={`color_${color.color}`} size={size} {...props} />
     </Container>
   );
 };

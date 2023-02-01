@@ -7,9 +7,9 @@ const MobileDiv = styled.div`
   overflow: hidden;
 `;
 
-function MainDiv({ children }) {
+const MainDiv = ({ children }) => {
   return <MobileDiv>{children}</MobileDiv>;
-}
+};
 
 MainDiv.propTypes = {
   children: PropTypes.arrayOf(PropTypes.element).isRequired,

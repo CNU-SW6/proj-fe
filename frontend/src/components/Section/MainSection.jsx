@@ -1,32 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { createSearchParams, useNavigate } from 'react-router-dom';
-function MainSection({ children, id, height, backgroundColor, ...props }) {
+import { useNavigate } from 'react-router-dom';
+const MainSection = ({ children, id, height, backgroundColor, ...props }) => {
   const navigate = useNavigate();
-
-  const SectionClick = () => {
-    navigate({
-      pathname: './color',
-      search: createSearchParams({
-        item: `${id}`,
-        color: `${backgroundColor}`,
-      }).toString(),
+  const handleColorSelect = () => {
+    navigate('./color', {
+      state: {
+        id,
+      },
     });
   };
-  /*
-  useEffect(() => {
-    searchParams.set(`${id}`, `${backgroundColor}`);
-    setSearchParams(searchParams);
-    console.log(`${id}`, searchParams.get(`${id}`));
-  }, []);
-*/
-
   return (
-    <div value={backgroundColor} style={{ height, backgroundColor, ...props.style }} role="presentation" onClick={SectionClick}>
+    <div
+      className={`${id}_Section`}
+      value={backgroundColor}
+      style={{ height, backgroundColor, ...props.style }}
+      role="presentation"
+      onClick={handleColorSelect}
+    >
       {children}
     </div>
   );
-}
+};
 
 MainSection.propTypes = {
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

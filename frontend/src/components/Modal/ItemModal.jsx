@@ -1,32 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 import AddItemButton from '../Button/AddItemButton';
 import ColorModal from './ColorModal';
-import MainDiv from '../MobileSection/MainDiv';
-
-const DUMMY_DATA_2 = [
-  {
-    id: 'cap',
-    item: '모자',
-    color: 'wheat',
-  },
-  {
-    id: 'top',
-    item: '상의',
-    color: 'ivory',
-  },
-  {
-    id: 'bottom',
-    item: '하의',
-    color: 'lightblue',
-  },
-  {
-    id: 'shoes',
-    item: '신발',
-    color: 'lightgray',
-  },
-];
-
 const ItemModalDiv = styled.div`
   width: 15%;
   height: 60%;
@@ -38,14 +14,16 @@ const ItemModalDiv = styled.div`
   top: 20%;
 `;
 
-function ItemModal() {
+const ItemModal = ({ items }) => {
   return (
-    <MainDiv>
-      <ItemModalDiv>
-        <ColorModal items={DUMMY_DATA_2} />
-        <AddItemButton />
-      </ItemModalDiv>
-    </MainDiv>
+    <ItemModalDiv>
+      <ColorModal items={items} />
+      <AddItemButton />
+    </ItemModalDiv>
   );
-}
+};
+
+ItemModal.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+};
 export default ItemModal;

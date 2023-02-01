@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { v4 } from 'uuid';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { ColorList } from '../../assets/ColorList';
 import ColorSpan from './ColorSpan';
-
+import { selectColor } from '../../redux/items/actions';
 const ColorListDiv = styled.div`
   width: 100%;
   height: 50%;
@@ -44,22 +47,43 @@ const SelectBtn = styled.button`
   background-color: #f8bed4;
   cursor: pointer;
 `;
-const ShowColorList = () => {
+const ShowColorList = ({ id, color, getColor }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleColorSelect = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const getName = e.target.className;
+    const targetColor = getName.split(' ')[0].split('_')[1];
+    getColor(targetColor);
+  };
+
+  const handleSubmit = () => {
+    dispatch(selectColor(id, color));
+    navigate('/lookgood');
+  };
   return (
     <ColorListDiv>
       <ColorParagraph>색상선택</ColorParagraph>
       <ColorListUl>
-        {ColorList.map((color) => {
+        {ColorList.map((c) => {
           return (
-            <ColorListLi key={v4()}>
-              <ColorSpan color={color} size={30} />
+            <ColorListLi key={v4()} onClick={handleColorSelect}>
+              <ColorSpan color={c} size={30} />
             </ColorListLi>
           );
         })}
       </ColorListUl>
-      <SelectBtn>선택완료</SelectBtn>
+      <SelectBtn onClick={handleSubmit}>선택완료</SelectBtn>
     </ColorListDiv>
   );
+};
+
+ShowColorList.propTypes = {
+  id: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  getColor: PropTypes.func.isRequired,
 };
 
 export default ShowColorList;

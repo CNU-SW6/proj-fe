@@ -15,12 +15,12 @@ const AddItemButtonIcon = styled.img`
   width: 80%;
 `;
 
-function AddItemButton() {
+const AddItemButton = () => {
   return (
     <AddItemButtonDiv>
       <AddItemButtonIcon src={plus} alt="AddItemIcon" />
     </AddItemButtonDiv>
   );
-}
+};
 
 export default AddItemButton;
