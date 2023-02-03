@@ -27,6 +27,7 @@
     "default-param-last": "off",
     "no-confusing-arrow" : "off",
     "implicit-arrow-linebreak": "off",
-    "function-paren-newline": "off"
+    "function-paren-newline": "off",
+    "global-require": "off"
   }
 }

@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import menuIcon from '../../assets/menuIcon.png';
 import '../../styles/header.css';
-const Header = ({ color, ...props }) => {
+import MenuIcon from '../../assets/MenuIcon';
+const Header = ({ color, clickMenuIcon, ...props }) => {
+  const handleMenu = () => {
+    // MENU ICON CLICKED
+    clickMenuIcon();
+  };
   return (
     <div className="Header">
-      <img className="Header_menuIcon" alt="menu" src={menuIcon} />
+      <MenuIcon size={32} color="#222" onClick={handleMenu} />
       <p className="Header_name" style={color && { color }} {...props}>
         look-good
       </p>

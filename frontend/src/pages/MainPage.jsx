@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import Header from '../components/Header';
 import Sections from '../components/Section/Sections';
-import MainDiv from '../components/MobileSection/MainDiv';
 import ItemModal from '../components/Modal/ItemModal';
-
+import DefaultSection from '../components/MobileSection/DefaultSection';
 const ButtonDiv = styled.div`
   height: 10%;
   display: flex;
@@ -24,15 +22,19 @@ const StyledBtn = styled.button`
   color: black;
 `;
 const MainPage = ({ items }) => {
+  const handleSearch = () => {
+    console.log(items);
+  };
   return (
-    <MainDiv>
-      <Header />
+    <DefaultSection>
       {items && <Sections items={items} />}
       {items && <ItemModal items={items} />}
       <ButtonDiv>
-        <StyledBtn type="button">Search</StyledBtn>
+        <StyledBtn type="button" onClick={handleSearch}>
+          Search
+        </StyledBtn>
       </ButtonDiv>
-    </MainDiv>
+    </DefaultSection>
   );
 };
 

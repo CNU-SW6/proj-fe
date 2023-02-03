@@ -1,13 +1,8 @@
 import React from 'react';
-import MainDiv from '../components/MobileSection/MainDiv';
-import Header from '../components/Header';
+import DefaultSection from '../components/MobileSection/DefaultSection';
 
 const SearchPage = () => {
-  return (
-    <MainDiv>
-      <Header />
-    </MainDiv>
-  );
+  return <DefaultSection />;
 };
 
 export default SearchPage;
