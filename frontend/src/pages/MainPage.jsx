@@ -4,6 +4,8 @@ import styled from '@emotion/styled';
 import Sections from '../components/Section/Sections';
 import ItemModal from '../components/Modal/ItemModal';
 import DefaultSection from '../components/MobileSection/DefaultSection';
+import '../styles/font.css';
+
 const ButtonDiv = styled.div`
   height: 10%;
   display: flex;
@@ -20,6 +22,7 @@ const StyledBtn = styled.button`
   font-size: 15px;
   padding: 10px 0;
   color: black;
+  font-family: 'Jua';
 `;
 const MainPage = ({ items }) => {
   const handleSearch = () => {
@@ -31,7 +34,7 @@ const MainPage = ({ items }) => {
       {items && <ItemModal items={items} />}
       <ButtonDiv>
         <StyledBtn type="button" onClick={handleSearch}>
-          Search
+          검색
         </StyledBtn>
       </ButtonDiv>
     </DefaultSection>

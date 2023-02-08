@@ -7,7 +7,24 @@ const MobileDiv = styled.div`
   width: 100vw;
   overflow: hidden;
 `;
-const menuList = ['홈 화면', '마이페이지', '공유페이지', '컨설팅'];
+const menuList = [
+  {
+    menu: '홈 화면',
+    link: '/lookgood',
+  },
+  {
+    menu: '마이페이지',
+    link: '/mypage',
+  },
+  {
+    menu: '공유페이지',
+    link: '/share',
+  },
+  {
+    menu: '컨설팅',
+    link: '/',
+  },
+];
 
 const DefaultSection = ({ children }) => {
   const [clickMenu, setClickMenu] = useState(false);
@@ -15,10 +32,6 @@ const DefaultSection = ({ children }) => {
   const clickMenuIcon = () => {
     setClickMenu(!clickMenu);
   };
-
-  useEffect(() => {
-    console.log(clickMenu);
-  }, [clickMenu]);
 
   return (
     <MobileDiv>
