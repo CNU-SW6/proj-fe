@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import plus from '../../assets/plusIcon.png';
+import Icon from '../../assets/Icon';
 const AddItemButtonDiv = styled.div`
   width: 100%;
   border-radius: 50%;
@@ -9,16 +9,10 @@ const AddItemButtonDiv = styled.div`
   margin: auto;
 `;
 
-const AddItemButtonIcon = styled.img`
-  margin-top: 10%;
-  height: 80%;
-  width: 80%;
-`;
-
 const AddItemButton = () => {
   return (
     <AddItemButtonDiv>
-      <AddItemButtonIcon src={plus} alt="AddItemIcon" />
+      <Icon name="plus" size={50} strokeWidth={4} />
     </AddItemButtonDiv>
   );
 };

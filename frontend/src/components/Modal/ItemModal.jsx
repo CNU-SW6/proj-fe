@@ -24,6 +24,10 @@ const ItemModal = ({ items }) => {
 };
 
 ItemModal.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+  items: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
+};
+
+ItemModal.defaultProps = {
+  items: [],
 };
 export default ItemModal;

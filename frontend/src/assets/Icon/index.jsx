@@ -1,12 +1,12 @@
 import React from 'react';
 import { Buffer } from 'buffer';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 
 const IconWrapper = styled.i`
   display: inline-block;
 `;
-
-const Icon = ({ size = 16, strokeWidth = 2, rotate, color = '#222', ...props }) => {
+const Icon = ({ name, size, strokeWidth, rotate, color, ...props }) => {
   const shapeStyle = {
     width: size,
     height: size,
@@ -18,15 +18,29 @@ const Icon = ({ size = 16, strokeWidth = 2, rotate, color = '#222', ...props }) 
     width: size,
     height: size,
   };
-  const icon = require('feather-icons').icons.menu;
+  const icon = require('feather-icons').icons[name];
   const svg = icon ? icon.toSvg(iconStyle) : '';
   const base64 = Buffer.from(svg, 'utf8').toString('base64');
 
   return (
     <IconWrapper {...props} style={shapeStyle}>
-      <img src={`data:image/svg+xml;base64,${base64}`} alt="menu" />
+      <img src={`data:image/svg+xml;base64,${base64}`} alt={name} />
     </IconWrapper>
   );
 };
 
+Icon.propTypes = {
+  name: PropTypes.string.isRequired,
+  size: PropTypes.number,
+  strokeWidth: PropTypes.number,
+  rotate: PropTypes.number,
+  color: PropTypes.string,
+};
+
+Icon.defaultProps = {
+  size: 16,
+  strokeWidth: 2,
+  rotate: 0,
+  color: '#222',
+};
 export default Icon;

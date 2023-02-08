@@ -5,6 +5,7 @@ import Sections from '../components/Section/Sections';
 import ItemModal from '../components/Modal/ItemModal';
 import DefaultSection from '../components/MobileSection/DefaultSection';
 import '../styles/font.css';
+import MenuShareButton from '../components/Button/MenuShareButton';
 
 const ButtonDiv = styled.div`
   height: 10%;
@@ -32,6 +33,7 @@ const MainPage = ({ items }) => {
     <DefaultSection>
       {items && <Sections items={items} />}
       {items && <ItemModal items={items} />}
+      <MenuShareButton />
       <ButtonDiv>
         <StyledBtn type="button" onClick={handleSearch}>
           검색

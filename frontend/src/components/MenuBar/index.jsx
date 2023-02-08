@@ -2,6 +2,8 @@ import styled from '@emotion/styled';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { v4 } from 'uuid';
+import PropTypes from 'prop-types';
+
 const MenuBarList = styled.div`
   height: 90%;
   width: 70%;
@@ -40,17 +42,30 @@ const MenuLink = styled(Link)`
   color: black;
 `;
 
-const MenuBar = ({ clickMenu, menuList, menuBarColor, menuColor, fontSize }) => {
+const MenuBar = ({ clickMenu, menuList, menuBarColor, fontSize }) => {
   return (
     <MenuBarList menuBarColor={menuBarColor} clickMenu={clickMenu}>
       {menuList.map((menu) => (
         <MenuDiv key={v4()}>
-          <MenuLink menu={menu.menu} menuColor={menuColor} fontSize={fontSize} to={menu.link}>
+          <MenuLink menu={menu.menu} fontSize={fontSize} to={menu.link}>
             {menu.menu}
           </MenuLink>
         </MenuDiv>
       ))}
     </MenuBarList>
   );
+};
+
+MenuBar.propTypes = {
+  clickMenu: PropTypes.bool.isRequired,
+  menuList: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
+  menuBarColor: PropTypes.string,
+  fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};
+
+MenuBar.defaultProps = {
+  menuList: [],
+  menuBarColor: '#ffffff',
+  fontSize: '12px',
 };
 export default MenuBar;

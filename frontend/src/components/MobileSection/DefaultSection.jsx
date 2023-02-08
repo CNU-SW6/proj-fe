@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 import Header from '../Header';
 import MenuBar from '../MenuBar';
+
 const MobileDiv = styled.div`
   height: 100vh;
   width: 100vw;
@@ -36,16 +38,13 @@ const DefaultSection = ({ children }) => {
   return (
     <MobileDiv>
       <Header clickMenuIcon={clickMenuIcon} />
-      <MenuBar
-        clickMenu={clickMenu}
-        menuList={menuList}
-        menuBarColor="#B0B0B0"
-        menuColor="#D9D9D9"
-        fontSize={13}
-      />
+      <MenuBar clickMenu={clickMenu} menuList={menuList} menuBarColor="#B0B0B0" fontSize={13} />
       {children}
     </MobileDiv>
   );
 };
 
+DefaultSection.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
+};
 export default DefaultSection;
