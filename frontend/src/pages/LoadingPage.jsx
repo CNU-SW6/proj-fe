@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/main.css';
 
-function LodingPage() {
+const LoadingPage = () => {
   const navigate = useNavigate();
+
   const timeout = () => {
     setTimeout(() => {
       navigate('/lookgood');
@@ -16,11 +17,12 @@ function LodingPage() {
       clearTimeout(timeout);
     };
   }, []);
+
   return (
     <div className="LoadingPage">
       <p className="LoadingPageLogo">look-good</p>
     </div>
   );
-}
+};
 
-export default LodingPage;
+export default LoadingPage;

@@ -1,7 +1,8 @@
 import React from 'react';
+import DefaultSection from '../components/MobileSection/DefaultSection';
 
-function SearchPage() {
-  return <div>검색페이지</div>;
-}
+const SearchPage = () => {
+  return <DefaultSection />;
+};
 
 export default SearchPage;

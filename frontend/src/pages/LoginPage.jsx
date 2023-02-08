@@ -1,7 +1,13 @@
 import React from 'react';
+import Header from '../components/Header';
+import MainDiv from '../components/MobileSection/MainDiv';
 
-function LoginPage() {
-  return <div>로그인페이지</div>;
-}
+const LoginPage = () => {
+  return (
+    <MainDiv>
+      <Header />
+    </MainDiv>
+  );
+};
 
 export default LoginPage;
