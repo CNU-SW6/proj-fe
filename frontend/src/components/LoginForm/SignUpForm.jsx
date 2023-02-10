@@ -35,22 +35,29 @@ const SignUpForm = ({ onSubmit }) => {
       <Title>회원가입</Title>
       <ConfirmInput type="text" name="name" placeholder="아이디" onChange={handleChange} />
       {errors.name && <ErrorText>{errors.name}</ErrorText>}
-      <Input
-        type="password"
-        name="password"
-        placeholder="비밀번호"
-        style={{ marginTop: 8 }}
-        onChange={handleChange}
-      />
-      {errors.password && <ErrorText>{errors.password}</ErrorText>}
-      <Input
-        type="password"
-        name="passwordConfirm"
-        placeholder="비밀번호 확인"
-        style={{ marginTop: 8 }}
-        onChange={handleChange}
-      />
-      {errors.passwordConfirm && <ErrorText>{errors.passwordConfirm}</ErrorText>}
+      <div>
+        <Input
+          type="password"
+          name="password"
+          width="75%"
+          placeholder="비밀번호"
+          style={{ marginTop: 8 }}
+          onChange={handleChange}
+        />
+        {errors.password && <ErrorText>{errors.password}</ErrorText>}
+      </div>
+      <div>
+        <Input
+          type="password"
+          name="passwordConfirm"
+          width="75%"
+          placeholder="비밀번호 확인"
+          style={{ marginTop: 8 }}
+          onChange={handleChange}
+        />
+        {errors.passwordConfirm && <ErrorText>{errors.passwordConfirm}</ErrorText>}
+      </div>
+
       <Button type="submit" disabled={isLoading} style={{ marginTop: 16 }}>
         회원가입
       </Button>

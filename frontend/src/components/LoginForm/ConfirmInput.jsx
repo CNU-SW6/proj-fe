@@ -6,7 +6,6 @@ const ConfirmInputDiv = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
 `;
 
 const ConfirmButton = styled.button`
@@ -17,6 +16,7 @@ const ConfirmButton = styled.button`
   border-radius: 10px;
   background-color: #fff9c3;
   font-size: 12px;
+  padding: 0;
 `;
 
 const ConfirmInput = ({ name, placeholder, onChange }) => {
