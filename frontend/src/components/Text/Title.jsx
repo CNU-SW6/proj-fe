@@ -24,6 +24,7 @@ Title.propTypes = {
   strong: PropTypes.bool,
   underline: PropTypes.bool,
   color: PropTypes.string,
+  style: PropTypes.objectOf(PropTypes.string),
 };
 
 Title.defaultProps = {
@@ -31,6 +32,7 @@ Title.defaultProps = {
   strong: false,
   underline: false,
   color: '#000000',
+  style: {},
 };
 
 export default Title;
