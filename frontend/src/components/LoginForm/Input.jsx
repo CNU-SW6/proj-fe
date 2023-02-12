@@ -15,12 +15,21 @@ const StyledInput = styled.input`
   box-sizing: border-box;
 `;
 
-const Input = ({ display, name, width, placeholder }) => {
-  return <StyledInput display={display} name={name} width={width} placeholder={placeholder} />;
+const Input = ({ display, type, name, width, placeholder }) => {
+  return (
+    <StyledInput
+      type={type}
+      display={display}
+      name={name}
+      width={width}
+      placeholder={placeholder}
+    />
+  );
 };
 
 Input.propTypes = {
   display: PropTypes.string,
+  type: PropTypes.string,
   name: PropTypes.string.isRequired,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   placeholder: PropTypes.string,
@@ -28,6 +37,7 @@ Input.propTypes = {
 
 Input.defaultProps = {
   display: 'block',
+  type: 'text',
   width: '100%',
   placeholder: '',
 };

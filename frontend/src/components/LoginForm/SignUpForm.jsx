@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from '@emotion/styled';
 import Input from './Input';
 import CardForm from './CardForm';
 import Title from './Title';
@@ -6,6 +7,21 @@ import useForm from '../../hooks/useForm';
 import ErrorText from './ErrorText';
 import Button from './Button';
 import ConfirmInput from './ConfirmInput';
+
+const StyledDiv = styled.div`
+  height: 10%;
+`;
+
+const StyledSelect = styled.select`
+  width: 40%;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+`;
+
+const StyledOption = styled.option`
+  border-radius: 5px;
+  background-color: #f5f5f5;
+`;
 
 const SignUpForm = ({ onSubmit }) => {
   const { errors, isLoading, handleChange, handleSubmit } = useForm({
@@ -33,8 +49,14 @@ const SignUpForm = ({ onSubmit }) => {
   return (
     <CardForm onSubmit={handleSubmit}>
       <Title>회원가입</Title>
-      <ConfirmInput type="text" name="name" placeholder="아이디" onChange={handleChange} />
-      {errors.name && <ErrorText>{errors.name}</ErrorText>}
+      <div>
+        <ConfirmInput type="text" name="id" placeholder="아이디" onChange={handleChange} />
+        {errors.id && <ErrorText>{errors.id}</ErrorText>}
+      </div>
+      <div>
+        <ConfirmInput type="text" name="name" placeholder="닉네임" onChange={handleChange} />
+        {errors.name && <ErrorText>{errors.name}</ErrorText>}
+      </div>
       <div>
         <Input
           type="password"
@@ -57,6 +79,15 @@ const SignUpForm = ({ onSubmit }) => {
         />
         {errors.passwordConfirm && <ErrorText>{errors.passwordConfirm}</ErrorText>}
       </div>
+      <StyledDiv>
+        <StyledSelect>
+          <StyledOption disabled selected value="none">
+            성별 선택
+          </StyledOption>
+          <StyledOption value="man">남</StyledOption>
+          <StyledOption value="woman">여</StyledOption>
+        </StyledSelect>
+      </StyledDiv>
 
       <Button type="submit" disabled={isLoading} style={{ marginTop: 16 }}>
         회원가입
