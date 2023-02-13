@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 import Input from './Input';
-
 const ConfirmInputDiv = styled.div`
   width: 100%;
   display: flex;
@@ -19,13 +19,36 @@ const ConfirmButton = styled.button`
   padding: 0;
 `;
 
-const ConfirmInput = ({ name, placeholder, onChange }) => {
+const ConfirmInput = ({ name, placeholder, onClick, onChange }) => {
+  const handleClick = () => {
+    onClick();
+  };
   return (
     <ConfirmInputDiv>
-      <Input display="inline-block" width="75%" name={name} placeholder={placeholder} />
-      <ConfirmButton type="button">중복확인</ConfirmButton>
+      <Input
+        display="inline-block"
+        width="75%"
+        name={name}
+        placeholder={placeholder}
+        onChange={onChange}
+      />
+      <ConfirmButton type="button" onClick={handleClick}>
+        중복확인
+      </ConfirmButton>
     </ConfirmInputDiv>
   );
+};
+
+ConfirmInput.propTypes = {
+  name: PropTypes.string,
+  placeholder: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
+ConfirmInput.defaultProps = {
+  name: '',
+  placeholder: '',
 };
 
 export default ConfirmInput;

@@ -15,7 +15,7 @@ const StyledInput = styled.input`
   box-sizing: border-box;
 `;
 
-const Input = ({ display, type, name, width, placeholder }) => {
+const Input = ({ display, type, name, width, placeholder, onChange }) => {
   return (
     <StyledInput
       type={type}
@@ -23,6 +23,7 @@ const Input = ({ display, type, name, width, placeholder }) => {
       name={name}
       width={width}
       placeholder={placeholder}
+      onChange={onChange}
     />
   );
 };
@@ -33,6 +34,7 @@ Input.propTypes = {
   name: PropTypes.string.isRequired,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   placeholder: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
 };
 
 Input.defaultProps = {

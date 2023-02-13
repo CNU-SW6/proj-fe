@@ -30,14 +30,14 @@ const LoginForm = ({ onSubmit }) => {
   const navigate = useNavigate();
   const { errors, isLoading, handleChange, handleSubmit } = useForm({
     initialValues: {
-      name: '',
+      id: '',
       password: '',
     },
     onSubmit,
-    validate: ({ name, password }) => {
+    validate: ({ id, password }) => {
       const newErrors = {};
-      if (!name) {
-        newErrors.name = '아이디를 입력해주세요.';
+      if (!id) {
+        newErrors.id = '아이디를 입력해주세요.';
       }
       if (!password) {
         newErrors.password = '비밀번호를 입력해주세요.';
@@ -60,8 +60,8 @@ const LoginForm = ({ onSubmit }) => {
     <CardForm onSubmit={handleSubmit}>
       <Title>로그인</Title>
       <InputDiv className="ID_Section">
-        <Input type="text" name="name" placeholder="아이디" onChange={handleChange} />
-        {errors.name && <ErrorText>{errors.name}</ErrorText>}
+        <Input type="text" name="id" placeholder="아이디" onChange={handleChange} />
+        {errors.id && <ErrorText>{errors.id}</ErrorText>}
       </InputDiv>
       <InputDiv className="PW_Section">
         <Input

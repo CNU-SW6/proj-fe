@@ -7,8 +7,9 @@ import MenuBar from '../MenuBar';
 const MobileDiv = styled.div`
   height: 100vh;
   width: 100vw;
-  overflow: hidden;
+  overflow: scroll;
 `;
+
 const menuList = [
   {
     menu: '홈 화면',

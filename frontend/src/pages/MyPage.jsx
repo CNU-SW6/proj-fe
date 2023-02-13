@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Title from '../components/Text/Title';
-import MainDiv from '../components/MobileSection/MainDiv';
-import Header from '../components/Header';
 import Box from '../components/Skeleton/Box';
+import DefaultSection from '../components/MobileSection/DefaultSection';
 
 const ShowDiv = styled.div`
   width: 100%;
@@ -13,8 +12,7 @@ const ShowDiv = styled.div`
 `;
 const MyPage = () => {
   return (
-    <MainDiv>
-      <Header />
+    <DefaultSection>
       <Title level={4} style={{ paddingLeft: '10px' }}>
         내가 올린 게시물
       </Title>
@@ -30,7 +28,7 @@ const MyPage = () => {
         <Box width={150} height={150} />
         <Box width={150} height={150} />
       </ShowDiv>
-    </MainDiv>
+    </DefaultSection>
   );
 };
 
