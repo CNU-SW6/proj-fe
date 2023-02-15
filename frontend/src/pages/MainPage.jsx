@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 import Sections from '../components/Section/Sections';
 import ItemModal from '../components/Modal/ItemModal';
 import DefaultSection from '../components/MobileSection/DefaultSection';
@@ -12,7 +13,7 @@ const ButtonDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fbcfc7;
+  background-color: #be3455;
 `;
 
 const StyledBtn = styled.button`
@@ -26,8 +27,12 @@ const StyledBtn = styled.button`
   font-family: 'Jua';
 `;
 const MainPage = ({ items }) => {
+  const navigate = useNavigate();
   const handleSearch = () => {
-    console.log(items);
+    /*
+      로그인된경우
+    */
+    navigate('/search');
   };
   return (
     <DefaultSection>

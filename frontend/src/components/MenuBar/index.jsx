@@ -42,7 +42,7 @@ const MenuDiv = styled.div`
 
   &:hover {
     font-weight: bold;
-    background-color: #bbbbbb;
+    background-color: #b9b9b9;
   }
 `;
 

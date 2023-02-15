@@ -39,7 +39,7 @@ const DefaultSection = ({ children }) => {
   return (
     <MobileDiv>
       <Header clickMenuIcon={clickMenuIcon} />
-      <MenuBar clickMenu={clickMenu} menuList={menuList} menuBarColor="#B0B0B0" fontSize={13} />
+      <MenuBar clickMenu={clickMenu} menuList={menuList} menuBarColor="#a3a3a3" fontSize={13} />
       {children}
     </MobileDiv>
   );

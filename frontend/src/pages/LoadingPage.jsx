@@ -21,6 +21,7 @@ const LoadingPage = () => {
   return (
     <div className="LoadingPage">
       <p className="LoadingPageLogo">look-good</p>
+      <p className="ColorExplain">look-good의 배경 색상은 올해의 컬러를 반영합니다.</p>
     </div>
   );
 };

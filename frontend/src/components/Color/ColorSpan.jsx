@@ -24,7 +24,7 @@ const ColorSpan = ({ color, size, ...props }) => {
 };
 
 ColorSpan.propTypes = {
-  color: PropTypes.string.isRequired,
+  color: PropTypes.objectOf(PropTypes.string).isRequired,
   size: PropTypes.number,
 };
 

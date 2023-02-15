@@ -34,7 +34,7 @@ const HeartCount = styled.p`
 const DetailMsg = styled.div`
   width: 100%;
   height: 20%;
-  background-color: pink;
+  background-color: #bc2649;
 `;
 
 const DetailPage = () => {

@@ -22,6 +22,7 @@ const Circle = styled.div`
   height: 30px;
   border-radius: 50%;
   background-color: ${({ color }) => color};
+  box-shadow: 1px 1px 3px 1px #bbb;
   position: relative;
   top: ${({ index }) => (index > 0 ? `${-10 * index}px` : 0)};
   z-index: ${({ index }) => index};
@@ -32,7 +33,7 @@ const ColorCircleList = ({ colorList }) => {
     <ColorCircleListDiv className="colorCircleListDiv">
       <SelectedColorParagraph>선택한 색상</SelectedColorParagraph>
       {colorList.map((color, index) => (
-        <Circle className={`circle${index}`} index={index} key={v4()} color={color} />
+        <Circle className={`circle${index}`} index={index} key={v4()} color={color.color} />
       ))}
     </ColorCircleListDiv>
   );
@@ -41,7 +42,7 @@ const ColorCircleList = ({ colorList }) => {
 export default ColorCircleList;
 
 ColorCircleList.propTypes = {
-  colorList: PropTypes.arrayOf(PropTypes.string),
+  colorList: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
 };
 
 ColorCircleList.defaultProps = {

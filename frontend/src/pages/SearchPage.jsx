@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
+import { v4 } from 'uuid';
 import DefaultSection from '../components/MobileSection/DefaultSection';
 import MenuShareButton from '../components/Button/MenuShareButton';
 import ColorCircleList from '../components/Modal/ColorCircleList';
@@ -28,15 +30,13 @@ const MenuShareButtonPosition = {
   bottom: '3%',
 };
 
-const TestColorList = ['#000000', '#888888', '#ff0000', '#00ffff'];
-
-const SearchPage = () => {
+const SearchPage = ({ items }) => {
   return (
     <DefaultSection overflow="scroll">
-      <ColorCircleList colorList={TestColorList} />
+      <ColorCircleList colorList={items} />
       <ResultSection>
         {shareDatas.map((data) => (
-          <ResultImgSection>
+          <ResultImgSection key={v4()}>
             <ResultImg src={data} alt="fashion" />
           </ResultImgSection>
         ))}
@@ -44,6 +44,10 @@ const SearchPage = () => {
       <MenuShareButton position={MenuShareButtonPosition} />
     </DefaultSection>
   );
+};
+
+SearchPage.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
 };
 
 export default SearchPage;

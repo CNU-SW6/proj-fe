@@ -44,7 +44,7 @@ const SelectBtn = styled.button`
   border: none;
   border-radius: 10px;
   color: white;
-  background-color: #f8bed4;
+  background-color: #bc2649;
   cursor: pointer;
 `;
 const ShowColorList = ({ id, color, getColor }) => {
