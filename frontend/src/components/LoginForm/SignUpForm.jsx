@@ -7,7 +7,8 @@ import Title from './Title';
 import useForm from '../../hooks/useForm';
 import ErrorText from './ErrorText';
 import Button from './Button';
-import ConfirmInput from './ConfirmInput';
+import ConfirmId from './ConfirmId';
+import ConfirmName from './ConfirmName';
 
 const StyledDiv = styled.div`
   height: 50px;
@@ -35,14 +36,8 @@ const SignUpForm = ({ onSubmit }) => {
       gender: '',
     },
     onSubmit,
-    validate: ({ id, name, password, passwordConfirm, gender }) => {
+    validate: ({ password, passwordConfirm, gender }) => {
       const newErrors = {};
-      if (!id) {
-        newErrors.id = '아이디를 입력해주세요.';
-      }
-      if (!name) {
-        newErrors.name = '닉네임을 입력해주세요.';
-      }
       if (!password) {
         newErrors.password = '비밀번호를 입력해주세요.';
       }
@@ -60,12 +55,10 @@ const SignUpForm = ({ onSubmit }) => {
     <CardForm onSubmit={handleSubmit}>
       <Title>회원가입</Title>
       <StyledDiv>
-        <ConfirmInput type="text" name="id" placeholder="아이디" onChange={handleChange} />
-        {errors.id && <ErrorText>{errors.id}</ErrorText>}
+        <ConfirmId type="text" name="id" placeholder="아이디" onChange={handleChange} />
       </StyledDiv>
       <StyledDiv>
-        <ConfirmInput type="text" name="name" placeholder="닉네임" onChange={handleChange} />
-        {errors.name && <ErrorText>{errors.name}</ErrorText>}
+        <ConfirmName type="text" name="name" placeholder="닉네임" onChange={handleChange} />
       </StyledDiv>
       <StyledDiv>
         <Input
@@ -90,8 +83,8 @@ const SignUpForm = ({ onSubmit }) => {
         {errors.passwordConfirm && <ErrorText>{errors.passwordConfirm}</ErrorText>}
       </StyledDiv>
       <StyledDiv>
-        <StyledSelect name="gender" onChange={handleChange}>
-          <StyledOption value="none" disabled selected>
+        <StyledSelect name="gender" onChange={handleChange} defaultValue="none">
+          <StyledOption value="none" disabled>
             성별 선택
           </StyledOption>
           <StyledOption value="man">남</StyledOption>
@@ -99,7 +92,7 @@ const SignUpForm = ({ onSubmit }) => {
         </StyledSelect>
         {errors.gender && <ErrorText>{errors.gender}</ErrorText>}
       </StyledDiv>
-      <Button type="submit" disabled={isLoading} style={{ marginTop: 16 }}>
+      <Button type="submit" disabled={isLoading} style={{ marginTop: 16 }} onSubmit={handleSubmit}>
         회원가입
       </Button>
     </CardForm>

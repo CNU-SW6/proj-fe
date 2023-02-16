@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const useForm = ({ initialValues, onSubmit, validate }) => {
   const [values, setValues] = useState(initialValues);
@@ -9,6 +9,10 @@ const useForm = ({ initialValues, onSubmit, validate }) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
+
+  useEffect(() => {
+    console.log(values);
+  }, [values]);
 
   const handleSubmit = async (e) => {
     setIsLoading(true);
