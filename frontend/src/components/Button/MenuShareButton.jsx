@@ -1,11 +1,15 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Icon from '../../assets/Icon';
+
 const IconsDiv = styled.div`
   position: fixed;
-  bottom: 10%;
-  left: 3%;
+  bottom: ${({ position }) => (position.bottom ? position.bottom : '')};
+  left: ${({ position }) => (position.left ? position.left : '')};
+  right: ${({ position }) => (position.right ? position.right : '')};
+  top: ${({ position }) => (position.top ? position.top : '')};
 `;
 
 const IconDiv = styled.div`
@@ -19,9 +23,9 @@ const IconDiv = styled.div`
   place-items: center;
 `;
 
-const MenuShareButton = () => {
+const MenuShareButton = ({ position }) => {
   return (
-    <IconsDiv>
+    <IconsDiv position={position}>
       <IconDiv className="icon" width="55px" height="55px">
         <Link to="/share">
           <Icon name="share-2" size={40} />
@@ -37,3 +41,14 @@ const MenuShareButton = () => {
 };
 
 export default MenuShareButton;
+
+MenuShareButton.propTypes = {
+  position: PropTypes.objectOf(PropTypes.string),
+};
+
+MenuShareButton.defaultProps = {
+  position: {
+    left: '3%',
+    bottom: '10%',
+  },
+};

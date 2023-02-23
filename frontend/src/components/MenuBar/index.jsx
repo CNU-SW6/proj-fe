@@ -14,6 +14,20 @@ const MenuBarList = styled.div`
   position: fixed;
   display: ${({ clickMenu }) => (clickMenu ? 'block' : 'none')};
   z-index: 1000;
+  animation: boxFade 0.5s ease;
+
+  @keyframes boxFade {
+    0% {
+      opacity: 0.5;
+      transform: translate(-100%, 0);
+    }
+    100% {
+      to {
+        opacity: 0;
+        transform: translate(0);
+      }
+    }
+  }
 `;
 
 const MenuDiv = styled.div`
@@ -28,7 +42,7 @@ const MenuDiv = styled.div`
 
   &:hover {
     font-weight: bold;
-    background-color: #bbbbbb;
+    background-color: #b9b9b9;
   }
 `;
 

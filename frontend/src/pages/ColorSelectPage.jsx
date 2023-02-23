@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Header from '../components/Header';
-import MainDiv from '../components/MobileSection/MainDiv';
 import ShowColorList from '../components/Color/ShowColorList';
+import DefaultSection from '../components/MobileSection/DefaultSection';
 
 const ItemDiv = styled.div`
   width: 100%;
@@ -27,13 +26,12 @@ const ColorSelectPage = ({ items }) => {
   };
 
   return (
-    <MainDiv>
-      <Header />
+    <DefaultSection>
       <ItemDiv color={color} item={getItem.id}>
         <img src={getItem.img} alt={getItem.id} height="100%" />
       </ItemDiv>
       <ShowColorList id={ID} color={color} getColor={getColor} />
-    </MainDiv>
+    </DefaultSection>
   );
 };
 

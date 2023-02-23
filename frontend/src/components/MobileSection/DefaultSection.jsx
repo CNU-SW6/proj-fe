@@ -7,8 +7,9 @@ import MenuBar from '../MenuBar';
 const MobileDiv = styled.div`
   height: 100vh;
   width: 100vw;
-  overflow: hidden;
+  overflow: scroll;
 `;
+
 const menuList = [
   {
     menu: '홈 화면',
@@ -38,7 +39,7 @@ const DefaultSection = ({ children }) => {
   return (
     <MobileDiv>
       <Header clickMenuIcon={clickMenuIcon} />
-      <MenuBar clickMenu={clickMenu} menuList={menuList} menuBarColor="#B0B0B0" fontSize={13} />
+      <MenuBar clickMenu={clickMenu} menuList={menuList} menuBarColor="#a3a3a3" fontSize={13} />
       {children}
     </MobileDiv>
   );

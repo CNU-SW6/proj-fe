@@ -1,9 +1,14 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Title from '../components/Text/Title';
-import MainDiv from '../components/MobileSection/MainDiv';
-import Header from '../components/Header';
 import Box from '../components/Skeleton/Box';
+import DefaultSection from '../components/MobileSection/DefaultSection';
+
+const PostDiv = styled.div`
+  width: 100%;
+  height: 40%;
+  overflow-y: scroll;
+`;
 
 const ShowDiv = styled.div`
   width: 100%;
@@ -13,24 +18,27 @@ const ShowDiv = styled.div`
 `;
 const MyPage = () => {
   return (
-    <MainDiv>
-      <Header />
-      <Title level={4} style={{ paddingLeft: '10px' }}>
-        내가 올린 게시물
-      </Title>
-      <ShowDiv>
-        <Box width={150} height={150} />
-        <Box width={150} height={150} />
-      </ShowDiv>
+    <DefaultSection>
+      <PostDiv>
+        <Title level={4} style={{ paddingLeft: '5%' }}>
+          내가 올린 게시물
+        </Title>
+        <ShowDiv>
+          <Box width={150} height={150} />
+          <Box width={150} height={150} />
+        </ShowDiv>
+      </PostDiv>
       <hr />
-      <Title level={4} style={{ paddingLeft: '10px' }}>
-        좋아요 누른 게시물
-      </Title>
-      <ShowDiv>
-        <Box width={150} height={150} />
-        <Box width={150} height={150} />
-      </ShowDiv>
-    </MainDiv>
+      <PostDiv>
+        <Title level={4} style={{ paddingLeft: '5%' }}>
+          좋아요 누른 게시물
+        </Title>
+        <ShowDiv>
+          <Box width={150} height={150} />
+          <Box width={150} height={150} />
+        </ShowDiv>
+      </PostDiv>
+    </DefaultSection>
   );
 };
 

@@ -6,3 +6,4 @@ export { default as MyPage } from './MyPage';
 export { default as SearchPage } from './SearchPage';
 export { default as SharePage } from './SharePage';
 export { default as SignupPage } from './SignupPage';
+export { default as DetailPage } from './DetailPage';

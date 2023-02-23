@@ -1,11 +1,13 @@
 .Header {
+  position: sticky;
+  top: 0;
   height: 10%;
   width: 100%;
   display: inline-grid;
   grid-template-columns: 70px 1fr 70px;
   grid-template-rows: 1fr;
   place-items: center;
-  background: linear-gradient(to right, #ffd2fc, #fbcfc7);
+  background-color: #bc2649;
 }
 
 .Header_menuIcon {
