@@ -4,11 +4,9 @@ import PropTypes from 'prop-types';
 import Input from './Input';
 import CardForm from './CardForm';
 import Title from './Title';
-import useForm from '../../hooks/useForm';
 import ErrorText from './ErrorText';
 import Button from './Button';
-import ConfirmId from './ConfirmId';
-import ConfirmName from './ConfirmName';
+import useSignUpForm from '../../hooks/useSignUpForm';
 
 const StyledDiv = styled.div`
   height: 50px;
@@ -26,18 +24,56 @@ const StyledOption = styled.option`
   background-color: #f5f5f5;
 `;
 
+const ConfirmButton = styled.button`
+  margin-left: 5%;
+  width: 20%;
+  height: 30px;
+  display: inline-block;
+  border: none;
+  border-radius: 10px;
+  background-color: #fff9c3;
+  font-size: 12px;
+  padding: 0;
+`;
+
 const SignUpForm = ({ onSubmit }) => {
-  const { errors, isLoading, handleChange, handleSubmit } = useForm({
+  const { errors, isLoading, handleChange, handleSubmit, validateCheck } = useSignUpForm({
     initialValues: {
       id: '',
-      name: '',
+      nickname: '',
       password: '',
       passwordConfirm: '',
       gender: '',
+      idDuplicateCheck: false,
+      nameDuplicateCheck: false,
     },
     onSubmit,
-    validate: ({ password, passwordConfirm, gender }) => {
+    duplicateValidateId: (id) => {
+      if (!id) {
+        return '아이디를 입력해주세요.';
+      }
+      return '';
+    },
+    duplicateValidateName: (nickname) => {
+      if (!nickname) {
+        return '닉네임을 입력해주세요.';
+      }
+      return '';
+    },
+    submitValidate: ({
+      password,
+      passwordConfirm,
+      gender,
+      idDuplicateCheck,
+      nameDuplicateCheck,
+    }) => {
       const newErrors = {};
+      if (!idDuplicateCheck) {
+        newErrors.id = '아이디 중복 여부를 확인해주세요.';
+      }
+      if (!nameDuplicateCheck) {
+        newErrors.nickname = '닉네임 중복 여부를 확인해주세요.';
+      }
       if (!password) {
         newErrors.password = '비밀번호를 입력해주세요.';
       }
@@ -55,10 +91,31 @@ const SignUpForm = ({ onSubmit }) => {
     <CardForm onSubmit={handleSubmit}>
       <Title>회원가입</Title>
       <StyledDiv>
-        <ConfirmId type="text" name="id" placeholder="아이디" onChange={handleChange} />
+        <Input
+          className="idInput"
+          display="inline-block"
+          width="75%"
+          name="id"
+          placeholder="아이디"
+          onChange={handleChange}
+        />
+        <ConfirmButton name="id" type="button" onClick={validateCheck}>
+          중복확인
+        </ConfirmButton>
+        {errors.id && <ErrorText>{errors.id}</ErrorText>}
       </StyledDiv>
       <StyledDiv>
-        <ConfirmName type="text" name="name" placeholder="닉네임" onChange={handleChange} />
+        <Input
+          display="inline-block"
+          width="75%"
+          name="nickname"
+          placeholder="닉네임"
+          onChange={handleChange}
+        />
+        <ConfirmButton name="nickname" type="button" onClick={validateCheck}>
+          중복확인
+        </ConfirmButton>
+        {errors.nickname && <ErrorText>{errors.nickname}</ErrorText>}
       </StyledDiv>
       <StyledDiv>
         <Input

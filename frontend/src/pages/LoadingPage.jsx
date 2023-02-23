@@ -1,18 +1,26 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/main.css';
+import { getItem } from '../utils/storage';
 
 const LoadingPage = () => {
   const navigate = useNavigate();
 
-  const timeout = () => {
+  const timeout = (navigateTo) => {
     setTimeout(() => {
-      navigate('/lookgood');
+      navigate(navigateTo);
     }, 3000);
   };
 
   useEffect(() => {
-    timeout();
+    const userNo = getItem('userNo');
+    let navigateTo = '';
+    if (!userNo) {
+      navigateTo = '/login';
+    } else {
+      navigateTo = '/lookgood';
+    }
+    timeout(navigateTo);
     return () => {
       clearTimeout(timeout);
     };

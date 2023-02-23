@@ -15,33 +15,41 @@ const StyledInput = styled.input`
   box-sizing: border-box;
 `;
 
-const Input = ({ display, type, name, width, placeholder, onChange }) => {
+const Input = ({ className, display, type, name, width, placeholder, onChange, value }) => {
   return (
     <StyledInput
+      className={className}
       type={type}
       display={display}
       name={name}
       width={width}
       placeholder={placeholder}
       onChange={onChange}
+      value={value}
+      pattern="^[a-zA-Z0-9]+$"
+      title="영문 대소문자, 숫자로 이루어진 3~10 자를 입력해주세요."
     />
   );
 };
 
 Input.propTypes = {
+  className: PropTypes.string,
   display: PropTypes.string,
   type: PropTypes.string,
   name: PropTypes.string.isRequired,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  value: PropTypes.string,
 };
 
 Input.defaultProps = {
+  className: '',
   display: 'block',
   type: 'text',
   width: '100%',
   placeholder: '',
+  value: '',
 };
 
 export default Input;

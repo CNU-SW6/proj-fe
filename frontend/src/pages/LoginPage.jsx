@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import LoginForm from '../components/LoginForm/LoginForm';
 import DefaultSection from '../components/MobileSection/DefaultSection';
-
+import { login } from '../api/api';
 const LoginFormDiv = styled.div`
   width: 100%;
   height: 70%;
@@ -12,8 +12,9 @@ const LoginFormDiv = styled.div`
 `;
 
 const LoginPage = () => {
-  const handleSubmit = () => {
-    console.log('로그인 버튼 클릭!');
+  const handleSubmit = async (data) => {
+    const result = await login(JSON.stringify(data));
+    return result;
   };
   return (
     <DefaultSection>

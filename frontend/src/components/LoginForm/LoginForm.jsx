@@ -4,10 +4,10 @@ import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 import Input from './Input';
 import Button from './Button';
-import useForm from '../../hooks/useForm';
 import ErrorText from './ErrorText';
 import CardForm from './CardForm';
 import Title from './Title';
+import useLoginForm from '../../hooks/useLoginForm';
 
 const InputDiv = styled.div`
   width: 100%;
@@ -28,7 +28,7 @@ const ButtonDiv = styled.div`
 `;
 const LoginForm = ({ onSubmit }) => {
   const navigate = useNavigate();
-  const { errors, isLoading, handleChange, handleSubmit } = useForm({
+  const { values, errors, isLoading, handleChange, handleSubmit } = useLoginForm({
     initialValues: {
       id: '',
       password: '',
@@ -51,8 +51,6 @@ const LoginForm = ({ onSubmit }) => {
     const ID = e.target.dataset.id;
     if (ID === 'signup') {
       navigate('/signup');
-    } else if (ID === 'find') {
-      navigate('/find');
     }
   };
 
@@ -60,7 +58,13 @@ const LoginForm = ({ onSubmit }) => {
     <CardForm onSubmit={handleSubmit}>
       <Title>로그인</Title>
       <InputDiv className="ID_Section">
-        <Input type="text" name="id" placeholder="아이디" onChange={handleChange} />
+        <Input
+          type="text"
+          name="id"
+          placeholder="아이디"
+          onChange={handleChange}
+          value={values.id}
+        />
         {errors.id && <ErrorText>{errors.id}</ErrorText>}
       </InputDiv>
       <InputDiv className="PW_Section">
@@ -70,6 +74,7 @@ const LoginForm = ({ onSubmit }) => {
           placeholder="비밀번호"
           style={{ marginTop: 8 }}
           onChange={handleChange}
+          value={values.password}
         />
         {errors.password && <ErrorText>{errors.password}</ErrorText>}
       </InputDiv>
@@ -84,7 +89,7 @@ const LoginForm = ({ onSubmit }) => {
           </Button>
         </ButtonDiv>
         <ButtonDiv>
-          <Button type="button" data-id="find" onClick={handleClick}>
+          <Button type="button" data-id="find">
             ID/PW 찾기
           </Button>
         </ButtonDiv>

@@ -13,6 +13,7 @@ import {
   DetailPage,
 } from './pages';
 import ItemModal from './components/Modal/ItemModal';
+import CameraTest from './pages/CameraTest';
 
 function App() {
   const items = useSelector((state) => state);
@@ -29,6 +30,7 @@ function App() {
         <Route path="/share" element={<SharePage />} />
         <Route path="/test" element={<ItemModal />} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/cameraTest" element={<CameraTest />} />
       </Routes>
     </BrowserRouter>
   );
