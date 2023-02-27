@@ -4,10 +4,12 @@ import { IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PhotoCameraRoundedIcon from '@material-ui/icons/PhotoCameraRounded';
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 import DefaultSection from '../components/MobileSection/DefaultSection';
 import ColorModal from '../components/Modal/ColorModal';
 import RadioButtons from '../components/Button/RadioButtons';
 import { getItem } from '../utils/storage';
+import { uploadImg, uploadPost } from '../api/api';
 
 const StyledForm = styled.form`
   width: 100%;
@@ -37,15 +39,6 @@ const ImgShowDiv = styled.div`
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   place-items: center;
-`;
-
-const ColorModalDiv = styled.div`
-  width: 100%;
-  position: absolute;
-  top: 10%;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: end;
 `;
 
 const PostArea = styled.textarea`
@@ -84,10 +77,6 @@ const SubmitButton = styled.button`
 `;
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    height: '100%',
-    textAlign: 'center',
-  },
   imgBox: {
     maxWidth: '100%',
     maxHeight: '100%',
@@ -102,6 +91,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SharePage = () => {
+  const navigate = useNavigate();
   const classes = useStyles();
   const [source, setSource] = useState('');
   const defaultItems = [
@@ -126,33 +116,57 @@ const SharePage = () => {
       color: 'white',
     },
   ];
+
+  const genderList = ['남성', '여성'];
+  const purposeList = ['판매', '공유'];
   const [colors, setColors] = useState(defaultItems);
-  const [isMale, setIsMale] = useState(true);
-  const [isSell, setIsSell] = useState(true);
+  const [gender, setGender] = useState(genderList[0]);
+  const [purpose, setPurpose] = useState(purposeList[0]);
+  const [description, setDescription] = useState('');
 
   const getColor = (id, value) => {
     setColors(colors.map((item) => (item.id === id ? { ...item, color: value } : item)));
     // setColors({ ...colors, item });
   };
 
-  const handleSubmit = () => {
-    // dispatch(selectColor(ID, color));
-    // navigate('/lookgood');
-  };
-
-  useEffect(() => {
-    if (source !== '') {
-      /*
-      const form = new FormData();
-      form.append('userNo', getItem('userNo'));
-      form.append('image', )
-      */
-      console.log(source);
+  const handleSubmit = async () => {
+    if (source === '') {
+      return;
     }
-  }, [source]);
+    const userNo = getItem('userNo');
 
-  const genderList = ['남성', '여성'];
-  const purposeList = ['판매', '공유'];
+    const form = new FormData();
+
+    form.append('userNo', userNo);
+
+    const blob = new Blob([new ArrayBuffer(source)], { type: 'image/jpeg' });
+    const file = new File([blob], 'image.jpg');
+    form.append('image', file);
+    const res = await uploadImg(form);
+
+    if (res.error || res.data === '' || res.data === null) {
+      throw new Error('잘못된 이미지 업로드');
+    }
+    console.log(res.data);
+    const postData = {
+      userNo,
+      location: res.data,
+      hatColor: colors[0].color.substring(1),
+      topColor: colors[1].color.substring(1),
+      pantsColor: colors[2].color.substring(1),
+      shoesColor: colors[3].color.substring(1),
+      isMale: gender === '남성',
+      description,
+      isSell: purpose === '판매',
+    };
+    const result = await uploadPost(JSON.stringify(postData));
+    if (result.error) {
+      alert('상세정보에 판매주소를 추가해주세요.');
+    } else {
+      alert('게시물이 등록되었습니다.');
+      navigate('/lookgood');
+    }
+  };
 
   const handleCapture = (target) => {
     if (target.files) {
@@ -162,6 +176,10 @@ const SharePage = () => {
         setSource(newUrl);
       }
     }
+  };
+
+  const handleChange = (e) => {
+    setDescription(e.target.value);
   };
 
   return (
@@ -197,15 +215,25 @@ const SharePage = () => {
           <RadioButtons
             title="성별"
             selectList={genderList}
-            selectValue={isMale}
-            setValue={setIsMale}
+            selectValue={gender}
+            setValue={setGender}
           />
-          <RadioButtons title="게시목적" selectList={purposeList} selectValue={purposeList[0]} />
+          <RadioButtons
+            title="게시목적"
+            selectList={purposeList}
+            selectValue={purpose}
+            setValue={setPurpose}
+          />
           <StyledP>상세정보</StyledP>
-          <PostArea placeholder="상세정보를 입력해주세요." rows="4" />
+          <PostArea
+            placeholder="상세정보를 입력해주세요."
+            rows="4"
+            value={description}
+            onChange={handleChange}
+          />
         </Bottom>
         <SubmitButtonArea>
-          <SubmitButton type="submit" onSubmit={handleSubmit}>
+          <SubmitButton type="button" onClick={handleSubmit}>
             게시물 등록하기
           </SubmitButton>
         </SubmitButtonArea>

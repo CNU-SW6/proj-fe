@@ -36,6 +36,7 @@ const RadioButtons = ({ title, selectList, selectValue, setValue }) => {
   );
 };
 
+/*
 RadioButtons.propTypes = {
   title: PropTypes.string.isRequired,
   selectList: PropTypes.arrayOf(PropTypes.string),
@@ -46,4 +47,5 @@ RadioButtons.defaultProps = {
   selectList: [],
   selectValue: '',
 };
+*/
 export default RadioButtons;

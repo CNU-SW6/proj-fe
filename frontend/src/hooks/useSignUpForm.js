@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { request } from '../api/api';
 const useSignUpForm = ({
   initialValues,
@@ -7,6 +8,7 @@ const useSignUpForm = ({
   duplicateValidateName,
   submitValidate,
 }) => {
+  const navigate = useNavigate();
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -68,7 +70,11 @@ const useSignUpForm = ({
         isMale: values.gender === 'man',
       };
 
-      await onSubmit(postValues);
+      const res = await onSubmit(postValues);
+      if (!res || res.error) {
+        return;
+      }
+      navigate('/login');
     }
     setErrors(newErrors);
     setIsLoading(false);

@@ -5,25 +5,25 @@ const initItems = [
     id: 'cap',
     item: '모자',
     img: Clothes[0],
-    color: '#ffffff',
+    color: '',
   },
   {
     id: 'top',
     item: '상의',
     img: Clothes[1],
-    color: '#ffffff',
+    color: '',
   },
   {
     id: 'bottom',
     item: '하의',
     img: Clothes[2],
-    color: '#ffffff',
+    color: '',
   },
   {
     id: 'shoes',
     item: '신발',
     img: Clothes[3],
-    color: '#ffffff',
+    color: '',
   },
 ];
 

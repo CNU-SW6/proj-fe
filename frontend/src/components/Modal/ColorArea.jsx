@@ -17,7 +17,7 @@ const ColorAreaValue = styled.div`
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: ${(props) => props.color || 'black'};
+  background: ${(props) => props.color || 'none'};
   box-shadow: 1px 1px 3px 1px #ccc;
   margin: auto;
 `;
@@ -30,10 +30,6 @@ const ColorArea = ({ item, getColor }) => {
   const handleSubmit = () => {
     setShow(false);
   };
-
-  useEffect(() => {
-    console.log(show);
-  }, [show]);
 
   return (
     <ColorAreaDiv>
