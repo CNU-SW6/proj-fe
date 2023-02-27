@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import DefaultSection from '../components/MobileSection/DefaultSection';
 import Box from '../components/Skeleton/Box';
 
 import Account from '../components/Account';
-import { getDetailPost, postLike } from '../api/api';
+import { deletePost, getDetailPost, postLike } from '../api/api';
 import MenuShareButton from '../components/Button/MenuShareButton';
 import filledHeart from '../assets/filled_heart.png';
 import emptyHeart from '../assets/empty_heart.png';
+import deleteIcon from '../assets/delete.png';
 import { getItem } from '../utils/storage';
 const DetailImgSection = styled.div`
   width: 80%;
@@ -48,6 +49,11 @@ const DetailImage = styled.img`
   height: 90%;
 `;
 
+const DeleteImage = styled.img`
+  width: 20px;
+  height: 20px;
+`;
+
 const SellDescription = styled.p`
   margin: 0;
   font-weight: bold;
@@ -72,14 +78,14 @@ const HeartIcon = styled.img`
 `;
 
 const DetailPage = () => {
+  const navigate = useNavigate();
   const location = useLocation();
-  const [like, setLike] = useState(false);
   const [image, setImage] = useState('');
   const [page, setPage] = useState();
   useEffect(() => {
     setImage(location.state.src);
     async function fetchPost() {
-      const res = await getDetailPost(location.state.postNo);
+      const res = await getDetailPost(location.state.postNo, getItem('userNo'));
       if (!res.error) {
         setPage(res.data);
       }
@@ -87,14 +93,30 @@ const DetailPage = () => {
     fetchPost();
   }, []);
 
+  useEffect(() => {
+    console.log(page);
+  }, [page]);
+
   const handleClick = async () => {
     const params = {
       userNo: getItem('userNo'),
     };
     await postLike(location.state.postNo, JSON.stringify(params));
-    const res = await getDetailPost(location.state.postNo);
+    const res = await getDetailPost(location.state.postNo, getItem('userNo'));
     if (!res.error) {
       setPage(res.data);
+    }
+  };
+
+  const deleteImg = async () => {
+    if (window.confirm('이 게시물을 삭제하시겠습니까?')) {
+      const params = {
+        userNo: getItem('userNo'),
+      };
+      const res = await deletePost(location.state.postNo, JSON.stringify(params));
+      if (!res.error) {
+        navigate('/lookgood');
+      }
     }
   };
 
@@ -102,12 +124,19 @@ const DetailPage = () => {
     <DefaultSection>
       <DetailImgSection>
         {image !== '' ? (
-          <DetailImage src={image} alt="포스트이미지" />
+          <div>
+            <DetailImage src={image} alt="포스트이미지" />
+            <DeleteImage src={deleteIcon} alt="delete" onClick={deleteImg} />
+          </div>
         ) : (
           <Box width="90%" height="90%" style={{ display: 'block' }} />
         )}
         <HeartSection>
-          <HeartIcon name="heart" src={like ? filledHeart : emptyHeart} onClick={handleClick} />
+          <HeartIcon
+            name="heart"
+            src={page && page.like ? filledHeart : emptyHeart}
+            onClick={handleClick}
+          />
           <HeartCount>{page ? page.likeNum : 100}</HeartCount>
         </HeartSection>
       </DetailImgSection>

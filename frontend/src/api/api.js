@@ -104,11 +104,11 @@ export const getMyPosts = async (userNo) => {
   }
 };
 
-export const getDetailPost = async (postNo) => {
+export const getDetailPost = async (postNo, userNo) => {
   try {
     const res = await axios({
       method: 'get',
-      url: `/api/posts/${postNo}`,
+      url: `/api/posts/${postNo}/${userNo}`,
       headers: {
         'X-CSRFToken': csrftoken,
         'Content-Type': 'application/json',
