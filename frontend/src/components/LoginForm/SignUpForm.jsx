@@ -17,6 +17,7 @@ const StyledSelect = styled.select`
   display: block;
   border-radius: 5px;
   background-color: #f5f5f5;
+  color: black;
 `;
 
 const StyledOption = styled.option`
@@ -34,6 +35,7 @@ const ConfirmButton = styled.button`
   background-color: #fff9c3;
   font-size: 12px;
   padding: 0;
+  color: black;
 `;
 
 const SignUpForm = ({ onSubmit }) => {

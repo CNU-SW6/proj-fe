@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { v4 } from 'uuid';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
@@ -11,8 +11,8 @@ const Modal = styled.div`
   border-radius: 10px;
   box-shadow: 1px 1px 3px 1px #bbb;
   display: grid;
-  margin: auto;
   grid-template-rows: 0.5fr 2fr 2fr 2fr 2fr;
+  pointer-events: auto;
 `;
 
 const ModalTitle = styled.p`
@@ -22,12 +22,12 @@ const ModalTitle = styled.p`
   font-weight: bold;
 `;
 
-const ColorModal = ({ items, width }) => {
+const ColorModal = ({ items, width, getColor, ...props }) => {
   return (
-    <Modal width={width}>
+    <Modal width={width} {...props}>
       <ModalTitle>색상표</ModalTitle>
       {items.map((item) => {
-        return <ColorArea key={v4()} item={item} />;
+        return <ColorArea key={v4()} item={item} getColor={getColor} />;
       })}
     </Modal>
   );
@@ -36,9 +36,11 @@ const ColorModal = ({ items, width }) => {
 ColorModal.propTypes = {
   items: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  getColor: PropTypes.func,
 };
 
 ColorModal.defaultProps = {
   width: '100%',
+  getColor: () => {},
 };
 export default ColorModal;

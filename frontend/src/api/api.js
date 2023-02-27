@@ -42,18 +42,15 @@ export const login = async (postData) => {
     return e.message;
   }
 };
+
 /*
-export const request = async (url) => {
+export const uploadImg = async () => {
   try {
-    const res = await axios.get(`${API_END_POINT}${url}`);
-
-    if (!res.ok) {
-      throw new Error('API Call Fail');
-    }
-
-    return await res.json();
-  } catch (e) {
-    return e.message;
+    const res = await axios({
+      method: 'post',
+      url: '/api/images',
+      headers: { 'X-CSRFToken': csrftoken, 'Content-Type': 'application/json' },
+    })
   }
-};
+}
 */

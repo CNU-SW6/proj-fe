@@ -1,10 +1,12 @@
 import React from 'react';
-import Webcam from 'react-webcam';
+import CameraPircture from './CameraPicture';
+import Header from '../Header';
 
 const Camera = () => {
   return (
     <div>
-      <Webcam />
+      <Header />
+      <CameraPircture />
     </div>
   );
 };

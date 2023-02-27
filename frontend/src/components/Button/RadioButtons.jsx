@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 const RadiosDiv = styled.div`
@@ -11,10 +11,9 @@ const SelectHeader = styled.div`
   font-weight: bold;
 `;
 
-const RadioButtons = ({ title, selectList, selectValue }) => {
-  const [selected, setSelected] = useState(selectValue);
+const RadioButtons = ({ title, selectList, selectValue, setValue }) => {
   const handleChange = (e) => {
-    setSelected(e.target.value);
+    setValue(e.target.value);
   };
   return (
     <RadiosDiv>
@@ -26,7 +25,7 @@ const RadioButtons = ({ title, selectList, selectValue }) => {
             type="radio"
             name={value}
             value={value}
-            checked={selected === value}
+            checked={selectValue === value}
             onChange={handleChange}
             style={{ height: '20px', marginLeft: '30px' }}
           />

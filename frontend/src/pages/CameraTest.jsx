@@ -1,6 +1,6 @@
 import React from 'react';
-import Camera from '../components/Camera';
+import SelectColor from '../components/Modal/SelectColor';
 const CameraTest = () => {
-  return <Camera />;
+  return <SelectColor />;
 };
 export default CameraTest;
