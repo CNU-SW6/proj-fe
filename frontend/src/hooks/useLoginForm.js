@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { setItem } from '../utils/storage';
 const useLoginForm = ({ initialValues, onSubmit, validate }) => {
+  const navigate = useNavigate();
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -28,6 +30,7 @@ const useLoginForm = ({ initialValues, onSubmit, validate }) => {
       } else {
         const { userNo } = result.data;
         setItem('userNo', userNo);
+        navigate('/lookgood');
       }
     }
     setIsLoading(false);

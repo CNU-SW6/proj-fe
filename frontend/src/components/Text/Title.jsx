@@ -24,7 +24,7 @@ Title.propTypes = {
   strong: PropTypes.bool,
   underline: PropTypes.bool,
   color: PropTypes.string,
-  style: PropTypes.objectOf(PropTypes.string),
+  style: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
 };
 
 Title.defaultProps = {

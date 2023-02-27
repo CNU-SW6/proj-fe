@@ -17,6 +17,7 @@ const StyledSelect = styled.select`
   display: block;
   border-radius: 5px;
   background-color: #f5f5f5;
+  color: black;
 `;
 
 const StyledOption = styled.option`
@@ -34,10 +35,11 @@ const ConfirmButton = styled.button`
   background-color: #fff9c3;
   font-size: 12px;
   padding: 0;
+  color: black;
 `;
 
 const SignUpForm = ({ onSubmit }) => {
-  const { errors, isLoading, handleChange, handleSubmit, validateCheck } = useSignUpForm({
+  const { values, errors, isLoading, handleChange, handleSubmit, validateCheck } = useSignUpForm({
     initialValues: {
       id: '',
       nickname: '',
@@ -98,6 +100,7 @@ const SignUpForm = ({ onSubmit }) => {
           name="id"
           placeholder="아이디"
           onChange={handleChange}
+          value={values.id}
         />
         <ConfirmButton name="id" type="button" onClick={validateCheck}>
           중복확인
@@ -111,6 +114,7 @@ const SignUpForm = ({ onSubmit }) => {
           name="nickname"
           placeholder="닉네임"
           onChange={handleChange}
+          value={values.nickname}
         />
         <ConfirmButton name="nickname" type="button" onClick={validateCheck}>
           중복확인
@@ -125,6 +129,7 @@ const SignUpForm = ({ onSubmit }) => {
           placeholder="비밀번호"
           style={{ marginTop: 8 }}
           onChange={handleChange}
+          value={values.password}
         />
         {errors.password && <ErrorText>{errors.password}</ErrorText>}
       </StyledDiv>
@@ -136,6 +141,7 @@ const SignUpForm = ({ onSubmit }) => {
           placeholder="비밀번호 확인"
           style={{ marginTop: 8 }}
           onChange={handleChange}
+          value={values.passwordConfirm}
         />
         {errors.passwordConfirm && <ErrorText>{errors.passwordConfirm}</ErrorText>}
       </StyledDiv>

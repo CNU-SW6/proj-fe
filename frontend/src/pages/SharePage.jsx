@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Box from '@material-ui/core/Box';
+import { IconButton } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import PhotoCameraRoundedIcon from '@material-ui/icons/PhotoCameraRounded';
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 import DefaultSection from '../components/MobileSection/DefaultSection';
 import ColorModal from '../components/Modal/ColorModal';
 import RadioButtons from '../components/Button/RadioButtons';
-import Camera from '../assets/camera.png';
+import { getItem } from '../utils/storage';
+import { uploadImg, uploadPost } from '../api/api';
+
+const StyledForm = styled.form`
+  width: 100%;
+  height: 90%;
+`;
+
 const Top = styled.div`
   width: 100%;
   height: 50%;
@@ -29,13 +41,6 @@ const ImgShowDiv = styled.div`
   place-items: center;
 `;
 
-const ColorModalDiv = styled.div`
-  height: 100%;
-  width: 30%;
-  float: right;
-  box-sizing: border-box;
-`;
-
 const PostArea = styled.textarea`
   width: 100%;
   padding: 5%;
@@ -49,19 +54,6 @@ const StyledP = styled.p`
   font-size: 15px;
   font-weight: bold;
   margin: 5px 0;
-`;
-
-const CameraButton = styled.button`
-  width: 70px;
-  height: 70px;
-  background-color: #d9d9d9;
-  border-radius: 50%;
-  border: none;
-`;
-
-const CameraIcon = styled.img`
-  width: 50px;
-  height: 50px;
 `;
 
 const SubmitButtonArea = styled.div`
@@ -84,21 +76,42 @@ const SubmitButton = styled.button`
   padding: 0 10px;
 `;
 
+const useStyles = makeStyles((theme) => ({
+  imgBox: {
+    maxWidth: '100%',
+    maxHeight: '100%',
+  },
+  img: {
+    height: 'inherit',
+    maxWidth: 'inherit',
+  },
+  input: {
+    display: 'none',
+  },
+}));
+
 const SharePage = () => {
+  const navigate = useNavigate();
+  const classes = useStyles();
+  const [source, setSource] = useState('');
   const defaultItems = [
     {
+      id: 'cap',
       item: '모자',
       color: 'white',
     },
     {
+      id: 'top',
       item: '상의',
       color: 'white',
     },
     {
+      id: 'bottom',
       item: '하의',
       color: 'white',
     },
     {
+      id: 'shoes',
       item: '신발',
       color: 'white',
     },
@@ -106,27 +119,136 @@ const SharePage = () => {
 
   const genderList = ['남성', '여성'];
   const purposeList = ['판매', '공유'];
+  const [colors, setColors] = useState(defaultItems);
+  const [gender, setGender] = useState(genderList[0]);
+  const [purpose, setPurpose] = useState(purposeList[0]);
+  const [description, setDescription] = useState('');
+
+  const getColor = (id, value) => {
+    setColors(colors.map((item) => (item.id === id ? { ...item, color: value } : item)));
+    // setColors({ ...colors, item });
+  };
+
+  useEffect(() => {
+    console.log(source);
+  }, [source]);
+
+  const handleSubmit = async () => {
+    if (source === '') {
+      return;
+    }
+    const userNo = getItem('userNo');
+    console.log(source);
+
+    const form = new FormData();
+
+    form.append('userNo', userNo);
+    /*
+    const blob = new Blob([new ArrayBuffer(source)], { type: 'image/jpeg' });
+    const file = new File([blob], 'image.jpg');
+    form.append('image', file);
+    */
+    form.append('image', source);
+    const res = await uploadImg(form);
+
+    if (res.error || res.data === '' || res.data === null) {
+      throw new Error('잘못된 이미지 업로드');
+    }
+    console.log(res.data);
+    const postData = {
+      userNo,
+      location: res.data,
+      hatColor: colors[0].color.substring(1),
+      topColor: colors[1].color.substring(1),
+      pantsColor: colors[2].color.substring(1),
+      shoesColor: colors[3].color.substring(1),
+      isMale: gender === '남성',
+      description,
+      isSell: purpose === '판매',
+    };
+    const result = await uploadPost(JSON.stringify(postData));
+    if (result.error) {
+      alert('상세정보에 판매주소를 추가해주세요.');
+    } else {
+      alert('게시물이 등록되었습니다.');
+      navigate('/lookgood');
+    }
+  };
+
+  const handleCapture = (target) => {
+    if (target.files) {
+      if (target.files.length !== 0) {
+        const file = target.files[0];
+        setSource(file);
+      }
+    }
+  };
+
+  const fileToBlog = () => {
+    const newUrl = URL.createObjectURL(source);
+    return newUrl;
+  };
+
+  const handleChange = (e) => {
+    setDescription(e.target.value);
+  };
+
   return (
     <DefaultSection>
-      <Top>
-        <ImgShowDiv>
-          <CameraButton>
-            <CameraIcon src={Camera} alt="cameraButton" />
-          </CameraButton>
-        </ImgShowDiv>
-        <ColorModalDiv>
-          <ColorModal items={defaultItems} width="50%" />
-        </ColorModalDiv>
-      </Top>
-      <Bottom>
-        <RadioButtons title="성별" selectList={genderList} selectValue={genderList[0]} />
-        <RadioButtons title="게시목적" selectList={purposeList} selectValue={purposeList[0]} />
-        <StyledP>상세정보</StyledP>
-        <PostArea placeholder="상세정보를 입력해주세요." rows="4" />
-      </Bottom>
-      <SubmitButtonArea>
-        <SubmitButton>게시물 등록하기</SubmitButton>
-      </SubmitButtonArea>
+      <StyledForm onSubmit={handleSubmit}>
+        <Top>
+          <ImgShowDiv>
+            {source ? (
+              <Box display="flex" justifyContent="center" border={1} className={classes.imgBox}>
+                <img src={fileToBlog()} alt="snap" className={classes.img} />
+              </Box>
+            ) : (
+              <div>
+                <label htmlFor="icon-button-file">
+                  <input
+                    accept="image/*"
+                    className={classes.input}
+                    id="icon-button-file"
+                    type="file"
+                    capture="environment"
+                    onChange={(e) => handleCapture(e.target)}
+                  />
+                  <IconButton color="primary" aria-label="upload picture" component="span">
+                    <PhotoCameraRoundedIcon fontSize="large" color="primary" />
+                  </IconButton>
+                </label>
+              </div>
+            )}
+          </ImgShowDiv>
+          <ColorModal items={colors} width="20%" getColor={getColor} style={{ margin: 'auto' }} />
+        </Top>
+        <Bottom>
+          <RadioButtons
+            title="성별"
+            selectList={genderList}
+            selectValue={gender}
+            setValue={setGender}
+          />
+          <RadioButtons
+            title="게시목적"
+            selectList={purposeList}
+            selectValue={purpose}
+            setValue={setPurpose}
+          />
+          <StyledP>상세정보</StyledP>
+          <PostArea
+            placeholder="상세정보를 입력해주세요."
+            rows="4"
+            value={description}
+            onChange={handleChange}
+          />
+        </Bottom>
+        <SubmitButtonArea>
+          <SubmitButton type="button" onClick={handleSubmit}>
+            게시물 등록하기
+          </SubmitButton>
+        </SubmitButtonArea>
+      </StyledForm>
     </DefaultSection>
   );
 };

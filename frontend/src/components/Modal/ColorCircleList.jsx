@@ -46,5 +46,5 @@ ColorCircleList.propTypes = {
 };
 
 ColorCircleList.defaultProps = {
-  colorList: ['#000000', '#000000', '#000000', '#000000'],
+  colorList: ['', '', '', ''],
 };

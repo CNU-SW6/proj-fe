@@ -31,6 +31,8 @@
     "global-require": "off",
     "linebreak-style": "off",
     "react/no-array-index-key": "off",
-    "import/no-unresolved": "off"
+    "import/no-unresolved": "off",
+    "jsx-ally/label-has-associated-control": "off",
+    "operator-linebreak": "off"
   }
 }

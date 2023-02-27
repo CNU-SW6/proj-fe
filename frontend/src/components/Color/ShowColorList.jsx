@@ -1,22 +1,22 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { v4 } from 'uuid';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { ColorList } from '../../assets/ColorList';
 import ColorSpan from './ColorSpan';
-import { selectColor } from '../../redux/items/actions';
 const ColorListDiv = styled.div`
   width: 100%;
   height: 50%;
   margin: 0;
   text-align: center;
+  padding-top: 3%;
+  box-sizing: border-box;
 `;
 
 const ColorParagraph = styled.p`
   font-size: 15px;
   text-align: center;
+  margin: 0;
 `;
 
 const ColorListUl = styled.ul`
@@ -36,33 +36,19 @@ const ColorListLi = styled.li`
   box-sizing: border-box;
 `;
 
-const SelectBtn = styled.button`
-  width: 80%;
-  height: 10%;
-  margin-top: 3%;
-  font-size: 15px;
-  border: none;
-  border-radius: 10px;
-  color: white;
-  background-color: #bc2649;
-  cursor: pointer;
-`;
-const ShowColorList = ({ id, color, getColor }) => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
+const ShowColorList = ({ item, getColor }) => {
   const handleColorSelect = (e) => {
     e.preventDefault();
     e.stopPropagation();
     const getName = e.target.className;
     const targetColor = getName.split(' ')[0].split('_')[1];
-    getColor(targetColor);
+    if (item === '') {
+      getColor(targetColor);
+    } else {
+      getColor(item, targetColor);
+    }
   };
 
-  const handleSubmit = () => {
-    dispatch(selectColor(id, color));
-    navigate('/lookgood');
-  };
   return (
     <ColorListDiv>
       <ColorParagraph>색상선택</ColorParagraph>
@@ -75,15 +61,17 @@ const ShowColorList = ({ id, color, getColor }) => {
           );
         })}
       </ColorListUl>
-      <SelectBtn onClick={handleSubmit}>선택완료</SelectBtn>
     </ColorListDiv>
   );
 };
 
 ShowColorList.propTypes = {
-  id: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
+  item: PropTypes.string,
   getColor: PropTypes.func.isRequired,
+};
+
+ShowColorList.defaultProps = {
+  item: '',
 };
 
 export default ShowColorList;
