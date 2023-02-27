@@ -2,18 +2,17 @@ import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { v4 } from 'uuid';
+import { useNavigate } from 'react-router-dom';
 import DefaultSection from '../components/MobileSection/DefaultSection';
 import MenuShareButton from '../components/Button/MenuShareButton';
 import ColorCircleList from '../components/Modal/ColorCircleList';
-
-import { shareDatas } from '../assets/FashionList';
-import RadioButtons from '../components/Button/RadioButtons';
 import { getStyles } from '../api/api';
+import coin from '../assets/coin.png';
 const ResultSection = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 90%;
+  height: 80%;
   margin: auto;
   overflow-y: ${({ overflow }) => overflow};
 `;
@@ -49,12 +48,29 @@ const StyledInput = styled.input`
   display: inline-block;
 `;
 
+const CoinImg = styled.img`
+  width: 30px;
+  height: 30px;
+`;
+
+const ErrorText = styled.p`
+  text-align: center;
+  color: red;
+`;
+
+const DefaultDiv = styled.div`
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+`;
+
 const MenuShareButtonPosition = {
   right: '3%',
   bottom: '3%',
 };
 
 const SearchPage = ({ items }) => {
+  const navigate = useNavigate();
   const [sort, setSort] = useState('newest');
   const [gender, setGender] = useState('male');
   const [result, setResult] = useState([]);
@@ -69,6 +85,16 @@ const SearchPage = ({ items }) => {
   useEffect(() => {
     console.log(result);
   }, [result]);
+
+  const showDetailPage = (e) => {
+    const postNo = e.target.dataset.postno;
+    navigate(`/detail/${postNo}`, {
+      state: {
+        src: e.target.src,
+        postNo,
+      },
+    });
+  };
 
   useEffect(() => {
     const params = {};
@@ -125,11 +151,16 @@ const SearchPage = ({ items }) => {
       </StyledSelect>
       <ColorCircleList colorList={items} />
       <ResultSection overflow="scroll">
-        {shareDatas.map((data) => (
-          <ResultImgSection key={v4()}>
-            <ResultImg src={data} alt="fashion" />
-          </ResultImgSection>
-        ))}
+        {result.length > 0 ? (
+          result.map((data) => (
+            <ResultImgSection key={v4()} onClick={showDetailPage}>
+              <ResultImg src={data.location} alt="fashion" data-postno={data.postNo} />
+              {data.sell ? <CoinImg src={coin} alt="sell" /> : <DefaultDiv />}
+            </ResultImgSection>
+          ))
+        ) : (
+          <ErrorText>검색 결과가 없습니다.</ErrorText>
+        )}
       </ResultSection>
       <MenuShareButton position={MenuShareButtonPosition} />
     </DefaultSection>

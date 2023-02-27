@@ -129,19 +129,26 @@ const SharePage = () => {
     // setColors({ ...colors, item });
   };
 
+  useEffect(() => {
+    console.log(source);
+  }, [source]);
+
   const handleSubmit = async () => {
     if (source === '') {
       return;
     }
     const userNo = getItem('userNo');
+    console.log(source);
 
     const form = new FormData();
 
     form.append('userNo', userNo);
-
+    /*
     const blob = new Blob([new ArrayBuffer(source)], { type: 'image/jpeg' });
     const file = new File([blob], 'image.jpg');
     form.append('image', file);
+    */
+    form.append('image', source);
     const res = await uploadImg(form);
 
     if (res.error || res.data === '' || res.data === null) {
@@ -172,10 +179,14 @@ const SharePage = () => {
     if (target.files) {
       if (target.files.length !== 0) {
         const file = target.files[0];
-        const newUrl = URL.createObjectURL(file);
-        setSource(newUrl);
+        setSource(file);
       }
     }
+  };
+
+  const fileToBlog = () => {
+    const newUrl = URL.createObjectURL(source);
+    return newUrl;
   };
 
   const handleChange = (e) => {
@@ -189,7 +200,7 @@ const SharePage = () => {
           <ImgShowDiv>
             {source ? (
               <Box display="flex" justifyContent="center" border={1} className={classes.imgBox}>
-                <img src={source} alt="snap" className={classes.img} />
+                <img src={fileToBlog()} alt="snap" className={classes.img} />
               </Box>
             ) : (
               <div>

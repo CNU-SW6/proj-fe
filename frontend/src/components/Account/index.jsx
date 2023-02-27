@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import userIcon from '../../assets/userIcon.png';
 const AccountDiv = styled.div`
@@ -25,15 +26,19 @@ const UserName = styled.p`
   font-size: 13px;
 `;
 
-const Account = () => {
+const Account = ({ userName }) => {
   return (
     <AccountDiv>
       <UserDiv>
         <UserImg src={userIcon} alt="userIcon" />
       </UserDiv>
-      <UserName>계정정보</UserName>
+      <UserName>{userName}</UserName>
     </AccountDiv>
   );
+};
+
+Account.propTypes = {
+  userName: PropTypes.string.isRequired,
 };
 
 export default Account;

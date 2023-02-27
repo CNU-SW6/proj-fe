@@ -103,3 +103,69 @@ export const getMyPosts = async (userNo) => {
     return e.message;
   }
 };
+
+export const getDetailPost = async (postNo) => {
+  try {
+    const res = await axios({
+      method: 'get',
+      url: `/api/posts/${postNo}`,
+      headers: {
+        'X-CSRFToken': csrftoken,
+        'Content-Type': 'application/json',
+      },
+    });
+    return res.data;
+  } catch (e) {
+    return e.message;
+  }
+};
+
+export const postLike = async (postNo, params) => {
+  try {
+    const res = await axios({
+      method: 'patch',
+      url: `/api/likes/posts/${postNo}`,
+      headers: {
+        'X-CSRFToken': csrftoken,
+        'Content-Type': 'application/json',
+      },
+      data: params,
+    });
+    return res.data;
+  } catch (e) {
+    return e.message;
+  }
+};
+
+export const getLikePosts = async (userNo) => {
+  try {
+    const res = await axios({
+      method: 'get',
+      url: `/api/posts/likes/users/${userNo}`,
+      headers: {
+        'X-CSRFToken': csrftoken,
+        'Content-Type': 'application/json',
+      },
+    });
+    return res.data;
+  } catch (e) {
+    return e.message;
+  }
+};
+
+export const deletePost = async (postNo, userNo) => {
+  try {
+    const res = await axios({
+      method: 'delete',
+      url: `/api/posts/${postNo}`,
+      headers: {
+        'X-CSRFToken': csrftoken,
+        'Content-Type': 'application/json',
+      },
+      data: userNo,
+    });
+    return res.data;
+  } catch (e) {
+    return e.message;
+  }
+};
